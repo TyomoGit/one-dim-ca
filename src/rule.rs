@@ -41,7 +41,8 @@ impl Rule {
             panic!("expected 3 cells, got {}", source.len());
         }
 
-        let [Cell { is_alive: left }, Cell { is_alive: middle }, Cell { is_alive: right }] = source else {
+        let [Cell { is_alive: left }, Cell { is_alive: middle }, Cell { is_alive: right }] = source
+        else {
             panic!("expected 3 cells, got {}", source.len());
         };
 
@@ -90,13 +91,37 @@ mod tests {
     #[test]
     fn apply() {
         let t = Rule::new(30);
-        assert_eq!(t.apply(&[Cell::new(true), Cell::new(true), Cell::new(true)]), Cell::new(false));
-        assert_eq!(t.apply(&[Cell::new(true), Cell::new(true), Cell::new(false)]), Cell::new(false));
-        assert_eq!(t.apply(&[Cell::new(true), Cell::new(false), Cell::new(true)]), Cell::new(false));
-        assert_eq!(t.apply(&[Cell::new(true), Cell::new(false), Cell::new(false)]), Cell::new(true));
-        assert_eq!(t.apply(&[Cell::new(false), Cell::new(true), Cell::new(true)]), Cell::new(true));
-        assert_eq!(t.apply(&[Cell::new(false), Cell::new(true), Cell::new(false)]), Cell::new(true));
-        assert_eq!(t.apply(&[Cell::new(false), Cell::new(false), Cell::new(true)]), Cell::new(true));
-        assert_eq!(t.apply(&[Cell::new(false), Cell::new(false), Cell::new(false)]), Cell::new(false));
+        assert_eq!(
+            t.apply(&[Cell::new(true), Cell::new(true), Cell::new(true)]),
+            Cell::new(false)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(true), Cell::new(true), Cell::new(false)]),
+            Cell::new(false)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(true), Cell::new(false), Cell::new(true)]),
+            Cell::new(false)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(true), Cell::new(false), Cell::new(false)]),
+            Cell::new(true)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(false), Cell::new(true), Cell::new(true)]),
+            Cell::new(true)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(false), Cell::new(true), Cell::new(false)]),
+            Cell::new(true)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(false), Cell::new(false), Cell::new(true)]),
+            Cell::new(true)
+        );
+        assert_eq!(
+            t.apply(&[Cell::new(false), Cell::new(false), Cell::new(false)]),
+            Cell::new(false)
+        );
     }
 }
