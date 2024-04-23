@@ -1,5 +1,34 @@
 use crate::{cell::Cell, rule::Rule};
 
+pub enum InitialState {
+    None,
+    SingleCentralCell,
+    Random,
+    Vec(Vec<Cell>),
+}
+
+impl InitialState {
+    pub fn to_vec(self, width: usize) -> Vec<Cell> {
+        match self {
+            InitialState::None => vec![Cell::new(false); width],
+            InitialState::SingleCentralCell => {
+                let mut cells = vec![Cell::new(false); width];
+                cells[width / 2] = Cell::new(true);
+                cells
+            }
+            InitialState::Random => {
+                let mut cells = Vec::with_capacity(width);
+                for _ in 0..width {
+                    cells.push(Cell::new(rand::random()));
+                }
+                cells
+            }
+            InitialState::Vec(cells) => cells,
+        }
+    }
+    
+}
+
 pub struct World {
     cells: Vec<Cell>,
     rule: Rule,
@@ -8,9 +37,9 @@ pub struct World {
 }
 
 impl World {
-    pub fn new(width: usize, rule: Rule, loop_edges: bool) -> World {
+    pub fn new(init_state: InitialState, width: usize, rule: Rule, loop_edges: bool) -> World {
         World {
-            cells: vec![Cell::new(false); width],
+            cells: init_state.to_vec(width),
             rule,
             steps: 0,
             loop_edges,
@@ -19,12 +48,6 @@ impl World {
 
     pub fn cells(&self) -> &[Cell] {
         &self.cells
-    }
-
-    pub fn initial_central_live_cell(width: usize, rule: Rule, loop_edges: bool) -> World {
-        let mut cells = Self::new(width, rule, loop_edges);
-        cells.cells[width / 2] = Cell::new(true);
-        cells
     }
 
     pub fn forward_until_glowed(&mut self) {

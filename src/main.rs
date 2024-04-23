@@ -1,7 +1,7 @@
 use std::fs;
 
 use indicatif::ProgressBar;
-use one_dim_ca::{generator::make_rule_ca, rule::Rule};
+use one_dim_ca::{generator::make_rule_ca, rule::Rule, world::InitialState};
 use rayon::iter::{IntoParallelIterator, ParallelIterator};
 
 fn main() {
@@ -13,8 +13,9 @@ fn main() {
         for is_loop_edges in [true, false] {
             let loop_edges = if is_loop_edges { "_loop" } else { "" };
             make_rule_ca(
+                InitialState::Random,
                 Rule::new(rule),
-                1000,
+                500,
                 &format!("graph/rule_{}{}.png", rule, loop_edges),
                 is_loop_edges,
             )
