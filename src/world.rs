@@ -26,7 +26,6 @@ impl InitialState {
             InitialState::Vec(cells) => cells,
         }
     }
-    
 }
 
 pub struct World {

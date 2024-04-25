@@ -8,7 +8,6 @@ use one_dim_ca::{generator::make_rule_ca, rule::Rule, world::InitialState};
 
 #[cfg(feature = "graph")]
 fn main() {
-
     let _ = fs::create_dir("graph");
 
     let bar = ProgressBar::new(u8::MAX as u64);
@@ -30,6 +29,4 @@ fn main() {
 }
 
 #[cfg(not(feature = "graph"))]
-fn main() {
-
-}
+fn main() {}

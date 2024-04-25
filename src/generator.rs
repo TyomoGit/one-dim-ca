@@ -1,4 +1,9 @@
-use crate::{cell::Cell, graph::make_graph, rule::Rule, world::{InitialState, World}};
+use crate::{
+    cell::Cell,
+    graph::make_graph,
+    rule::Rule,
+    world::{InitialState, World},
+};
 
 pub fn make_rule_ca(
     init_state: InitialState,

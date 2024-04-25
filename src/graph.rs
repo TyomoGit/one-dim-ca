@@ -31,9 +31,6 @@ fn draw_cells_history(
     cells_history: &[Vec<Cell>],
     drawing_area: &DrawingArea<BitMapBackend, Shift>,
 ) {
-    let sub_areas = drawing_area.split_evenly((cells_history[0].len(), cells_history.len()));
-    let mut sub_areas = sub_areas.iter();
-
     for (y, row) in cells_history.iter().enumerate() {
         for (x, cell) in row.iter().enumerate() {
             if cell.is_alive {
